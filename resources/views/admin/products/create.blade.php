@@ -59,10 +59,11 @@
             </select>
         </div>
         <div class="form-group">
-            <input class="form-control" required type="file" name="images[]" multiple>
+            <input class="form-control" required type="file" name="images" multiple>
         </div>
         <button class="btn btn-success" type="submit">Create</button>
         <button class="btn btn-default" data-dismiss="modal" >Cancel</button>
+    </div>
     {!! Form::close() !!}
     @stop
 
@@ -103,19 +104,18 @@
                 $(document).ready(function() {
                     $('select[name="product_categories_id"]').on('change', function() {
                         var categoryId = $(this).val();
-                        console.log(window.location.origin+'/sub_category/ajax/'+categoryId);
                         if(categoryId) {
                             $.ajax({
-                                url: window.location.origin+'/sub_category/ajax/'+categoryId,
+                                url: window.location.origin+'/mazraty/public/sub_category/ajax/'+categoryId,
                                 type: "GET",
                                 dataType: "json",
                                 success:function(data) {
-
+                                    console.log(data)
                                     $('select[name="product_subcategories_id"]').empty();
                                     //add all region option in the select box
                                     {{--$('select[name="product_sub_category_id"]').append(' <option   value="99999">{{__('messages.allRegions')}}</option>');--}}
                                     $.each(data, function(key, value) {
-                                        $('select[name="product_subcategories_id"]').append('<option value="'+ key +'">'+ value +'</option>');
+                                        $('select[name="product_subcategories_id"]').append('<option value="'+ value.id +'">'+ value.name +'</option>');
                                     });
                                 }
                             });
@@ -125,5 +125,4 @@
                     });
                 });
             </script>
-
 @stop

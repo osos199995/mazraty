@@ -25,7 +25,7 @@ class ProductsResource extends JsonResource
             'container'=>$this->container,
             'category name'=>$this->category->name,
             'subcategory name'=>$this->Subcategory->name,
-            'images'=>json_decode($this->images),
+            'images'=>asset('products/'.$this->images),
         ];
     }
 }

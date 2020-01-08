@@ -35,13 +35,13 @@
                 <tbody>
                @foreach($products as $product)
                 <tr>
-                    @if(null!==json_decode($product->images))
+                    @if(null!==$product->images)
 
-                        @foreach(json_decode($product->images) as $image)
+{{--                        @foreach(json_decode($product->images) as $image)--}}
 
-                        <td><img width="200px" src="{{asset('products/'.$image)}}" alt=""></td>
-                            @break
-                        @endforeach
+                        <td><img width="200px" src="{{asset('products/'.$product->images)}}" alt=""></td>
+{{--                            @break--}}
+{{--                        @endforeach--}}
                     @else
                         <td></td>
                     @endif

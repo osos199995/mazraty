@@ -42,19 +42,15 @@ class ProductsController extends Controller
             'description_ar' => 'required',
         ]);
 
-        if ($request->hasfile('images')) {
-
-            foreach ($request->file('images') as $image) {
-                $name = $image->getClientOriginalName();
-                $image->move(public_path() . '/products/', $name);
-                $data[] = $name;
-            }
+        if($file=$request->file('images')){
+            $name=time().$file->getClientOriginalName();
+            $file->move('products',$name);
+            $input['image']=$name;
         }
 
-        $images = json_encode($data);
 //dd($request->all());
         Products::create([
-            'images' => $images,
+            'images' => $name,
             'title' => $request->title,
             'title_ar' => $request->title_ar,
             'description' => $request->description,
@@ -116,29 +112,30 @@ class ProductsController extends Controller
         ]);
 
 
-        if ($request->hasfile('images')) {
+        if($file=$request->file('images')){
+            $name=time().$file->getClientOriginalName();
+            $file->move('products',$name);
+            $input['images']=$name;
 
-            foreach ($request->file('images') as $image) {
-                $name = $image->getClientOriginalName();
-                $image->move(public_path() . '/products/', $name);
-                $data[] = $name;
-                $images = json_encode($data);
+            $product= Products::find($id);
+            $product->update([
+                'images' => $name,
+                'title' => $request->title,
+                'title_ar' => $request->title_ar,
+                'description' => $request->description,
+                'description_ar' => $request->description_ar,
+                'products_categories_id' => $request->products_categories_id,
+                'product_subcategories_id	'=>$request->product_subcategories_id,
+                'number_of_container'=>$request->number_of_container,
+                'price'=>$request->price,
+                'container'=>$request->container,
+            ]);
 
-                $product= Products::find($id);
-                $product->update([
-                    'images' => $images,
-                    'title' => $request->title,
-                    'title_ar' => $request->title_ar,
-                    'description' => $request->description,
-                    'description_ar' => $request->description_ar,
-                    'products_categories_id' => $request->products_categories_id,
-                    'product_subcategories_id	'=>$request->product_subcategories_id,
-                    'number_of_container'=>$request->number_of_container,
-                    'price'=>$request->price,
-                    'container'=>$request->container,
-                ]);
-            }
+
+
         }
+
+
 
 
 
@@ -180,9 +177,9 @@ class ProductsController extends Controller
     }
 
     public function sub_category_ajax($categoryId){
-        dd('dd');
-//        $subcategories = DB::table("subcategories")
-//            ->where("category_id",$categoryId)->get();
+
+       $subcategories = Subcategories::where("category_id",$categoryId)->get();
+
         return json_encode($subcategories);
     }
 }

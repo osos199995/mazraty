@@ -48,17 +48,17 @@
 
 
                     <tbody>
-@if (json_decode($products->images))
+{{--@if (json_decode($products->images))--}}
 
 
-                    @foreach(json_decode($products->images) as $image)
+{{--                    @foreach(json_decode($products->images) as $image)--}}
 
                         <tr>
-                            <td><img style=" width: 200px" src="{{asset('products/'.$image)}}" alt=""></td>
+                            <td><img style=" width: 200px" src="{{asset('products/'.$products->images)}}" alt=""></td>
 
 
-                    @endforeach
-@endif
+{{--                    @endforeach--}}
+{{--@endif--}}
                     </tbody>
                 </table>
             </div>

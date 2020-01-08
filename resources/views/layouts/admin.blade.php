@@ -47,11 +47,11 @@
 {{--                            <h5 class="text-overflow"><small>Welcome {{Auth::user()->name}}</small> </h5>--}}
                         </div>
                         <!-- logout-->
-                        <a class="dropdown-item notify-item" href="{{ url('/user/logout') }}"
+                        <a class="dropdown-item notify-item" href="{{ route('logoutTest') }}"
                            onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                             <i class="zmdi zmdi-power"></i> <span>Logout</span>
-                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route('logoutTest') }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
                             </form>
                         </a>

@@ -63,7 +63,7 @@
 
 
         <div class="form-group">
-            <input class="form-control" type="file" name="images[]" multiple>
+            <input class="form-control" type="file" name="images" multiple>
         </div>
         <button class="btn btn-success" type="submit">edit</button>
         <button class="btn btn-default" data-dismiss="modal" >Cancel</button>

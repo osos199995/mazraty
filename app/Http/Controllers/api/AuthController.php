@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Http\Requests\RegisterFormRequest;
+use App\Http\Resources\UsersResource;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,16 +16,19 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('api');
     }
     public $loginAfterSignUp = true;
 
-    public function Register(Request $request)
+    public function Register(RegisterFormRequest $request)
     {
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'age'=>$request->age,
+            'mobile_number'=>$request->mobile_number,
+            'gender_id'=>$request->gender_id,
         ]);
 
         $token = auth()->login($user);
@@ -94,8 +99,6 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-//            'expires_in' => auth()->factory()->getTTL() * 60
-
         ]);
     }
 }

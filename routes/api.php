@@ -1,17 +1,12 @@
 <?php
 
-Route::group([
+Route::group(['prefix' => 'auth'], function () {
 
-
-    'prefix' => 'auth'
-
-], function () {
-
-    Route::post('login', 'AuthController@login');
-    Route::post('logout', 'AuthController@logout');
-    Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
-    Route::post('register', 'AuthController@Register');
+    Route::post('login', 'AuthController@login')->name('usersLogin');
+    Route::post('logout', 'AuthController@logout')->name('userLogout');
+    Route::post('refresh', 'AuthController@refresh')->middleware('auth');
+    Route::post('me', 'AuthController@me')->middleware('auth');
+    Route::post('register', 'AuthController@Register')->name('usersRegister');
 
 });
 Route::resource('categories','ApiCategoriesController');

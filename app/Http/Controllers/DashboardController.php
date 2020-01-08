@@ -15,6 +15,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
+//        $user =auth()->user();
         $user =User::first();
         return view('admin.dashboard.index',compact('user'));
     }
