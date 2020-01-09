@@ -15,10 +15,15 @@ class SubcategoriesController extends Controller
         $categories=Categories::all();
         $subcategories=Subcategories::all();
 
-        return view('admin.subcategories.showsubcategories',compact('subcategories','categories'));
+        return view('admin.subcategories.index  ',compact('subcategories','categories'));
     }
 
-
+    public function create()
+    {
+        $subcategories = Subcategories::all();
+        $categories = Categories::all();
+        return view('admin.subcategories.create', compact('categories', 'subcategories'));
+    }
     public function store(Request $request)
     {
 
@@ -31,7 +36,7 @@ class SubcategoriesController extends Controller
         }
         Subcategories::create($input);
         Session::flash('success','subcategory Added Successfully');
-        return redirect()->back();
+        return redirect('subcategory');
 
     }
 
@@ -69,9 +74,9 @@ class SubcategoriesController extends Controller
 
     public function destroy($id)
     {
-       $product= Products::where('product_categories_id',$id)->get();
+       $product= Products::where('product_subcategories_id',$id)->get();
        if ($product){
-           Products::where('product_categories_id',$id)->delete();
+           Products::where('product_subcategories_id',$id)->delete();
        }
         Subcategories::find($id)->delete();
         Session::flash('danger','subcategory Deleted Successfully and products related too');

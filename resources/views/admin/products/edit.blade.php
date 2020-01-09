@@ -35,12 +35,12 @@
         </div>
         <div class="form-group">
             {!! Form::label('number of container','number of contaier') !!}
-            <input  required value="number_of_container" name="number_of_container" type="number">
+            <input  required  value="{{old('number_of_container', $products->number_of_container)}}"  name="number_of_container" type="number">
         </div>
 
         <div class="form-group">
             {!! Form::label('price','price') !!}
-            <input required name="price" type="number">
+            <input required name="price" type="number" value="{{old('price', $products->price)}}">
         </div>
         <div class="form-group">
             {!! Form::label('category','Category') !!}

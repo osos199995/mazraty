@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-
+use App\Products;
+use App\SubCategories;
 class CategoriesController extends Controller
 {
     public function index()
@@ -38,9 +39,11 @@ class CategoriesController extends Controller
 
     public function destroy($id)
     {
-//        Products::where('product_categories_id',$id)->delete();
+    Subcategories::where('category_id',$id)->delete();
+       Products::where('product_categories_id',$id)->delete();
+     
         Categories::find($id)->delete();
-        Session::flash('danger','Category Deleted Successfully and products related too');
+        Session::flash('danger','Category Deleted Successfully and subcategory , products related too');
         return redirect()->back();
 
 

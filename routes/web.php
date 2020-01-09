@@ -33,7 +33,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::resource('admin-users', 'AdminUserController');
 Route::resource('categories','CategoriesController');
-Route::resource('/subcategory', 'SubCategoriesController');
+Route::resource('/subcategory', 'SubcategoriesController');
 Route::resource('/productsss', 'ProductsController');
 
 Route::get('/sub_category/ajax/{id}','ProductsController@sub_category_ajax');

@@ -33,6 +33,8 @@
                 <p class="text-muted font-13"><strong>container:</strong> <span class="m-l-15">{!! $products->container !!}</span></p>
                 <p class="text-muted font-13"><strong>number of container :</strong> <span class="m-l-15">{!! $products->number_of_container !!}</span></p>
                 <p class="text-muted font-13"><strong>price:</strong> <span class="m-l-15">{!! $products->price !!}</span></p>
+                <p class="text-muted font-13"><strong>category name:</strong> <span class="m-l-15">{!! $products->category->name !!}</span></p>
+                <p class="text-muted font-13"><strong>subcategory name:</strong> <span class="m-l-15">{!! $products->subcategory->name !!}</span></p>
             </div>
             <div class="card-box">
                 <table data-toggle="table"
