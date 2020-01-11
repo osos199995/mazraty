@@ -101,7 +101,7 @@
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
                     {{--End Modal for user delete--}}
-                    {{--End Modal for user delete--}}{{--Modal for user delete--}}
+                    {{--start Modal for subcategories edit--}}
                     <div class="modal fade {{$subcategory['id'].'edit'}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -146,7 +146,7 @@
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
-                    {{--End Modal for user delete--}}
+                    {{--End Modal for subcategories edit--}}
                     <?php endforeach ?>
                     </tbody>
                 </table>

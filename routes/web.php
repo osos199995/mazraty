@@ -15,8 +15,11 @@
 //    return view('welcome');
 //});
 //
-$this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
-$this->post('login', 'Auth\LoginController@login');
+
+
+$this->get('loginadmin', 'Auth\LoginController@showLoginForm')->name('loginadmin');
+$this->post('loginadmin', 'Auth\LoginController@login')->name('loginadmin');
+
 $this->post('logoutTest', 'Auth\LogoutController@logout')->name('logoutTest');
 
 // Registration Routes...
@@ -29,6 +32,10 @@ $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
 $this->post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
 
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 Route::resource('admin-users', 'AdminUserController');

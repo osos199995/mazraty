@@ -19,4 +19,6 @@ class Subcategories extends Model
     public  function Subcategories(){
         return $this->belongsTo('App\Categories','category_id');
     }
+
+    
 }

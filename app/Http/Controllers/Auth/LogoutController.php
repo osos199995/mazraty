@@ -9,6 +9,6 @@ class LogoutController extends Controller
 {
     public function logout(){
         auth()->guard('web')->logout();
-        return redirect('\login');
+        return redirect('\loginadmin');
     }
 }
