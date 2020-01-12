@@ -42,6 +42,12 @@ Route::resource('admin-users', 'AdminUserController');
 Route::resource('categories','CategoriesController');
 Route::resource('/subcategory', 'SubcategoriesController');
 Route::resource('/productsss', 'ProductsController');
-
+// ajax route to get subcategory in change category 
 Route::get('/sub_category/ajax/{id}','ProductsController@sub_category_ajax');
 
+Route::resource('customers','AdminCustomersController');
+// ajax route to change user statue 
+Route::get('/changeStatus', 'AdminCustomersController@changeStatus');
+
+
+Route::resource('offers','AdminOfferController');

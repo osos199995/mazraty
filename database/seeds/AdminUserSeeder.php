@@ -12,7 +12,9 @@ class AdminUserSeeder extends Seeder
     public function run()
     {
         \App\User::create([
-            'name'=>'Mohamed',
+            'f_name'=>'Mohamed',
+            'l_name'=>'osama',
+            'role_id'=>'1',
             'email'=>'admin@gmail.com',
             'password'=>bcrypt('123456')
         ]);

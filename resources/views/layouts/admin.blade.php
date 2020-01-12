@@ -103,6 +103,10 @@
                         {{--                        <a href="{{route('sliders.index')}}" class="waves-effect"><i class="fa fa-sliders"></i></i> <span>Slider</span></a>--}}
                         {{--                        <a href="{{route('healthes.index')}}" class="waves-effect"><i class="fa fa-heartbeat "></i></i> <span>Health And Safety</span></a>--}}
                         <a href="{{route('productsss.index')}}" class="waves-effect"><i class="fa fa-list"></i> <span>Products</span></a>
+                        <a href="{{route('offers.index')}}" class="waves-effect"><i class="fa fa-list"></i> <span>offers</span></a>
+
+                        <a href="{{route('customers.index')}}" class="waves-effect"><i class="fa fa-list"></i> <span>customers</span></a>
+
                         {{--                        <a href="{{route('blog.index')}}" class="waves-effect"><i class="fa fa-file"></i> <span>Blog</span></a>--}}
                     </li>
                 </ul>

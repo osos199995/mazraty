@@ -22,13 +22,23 @@ class AuthController extends Controller
 
     public function Register(RegisterFormRequest $request)
     {
+        
         $user = User::create([
-            'name' => $request->name,
+            'f_name' => $request->f_name,
+            'l_name' => $request->l_name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'age'=>$request->age,
             'mobile_number'=>$request->mobile_number,
             'gender_id'=>$request->gender_id,
+            'governerate'=>$request->governerate,
+            'area'=>$request->area,
+            'streeet'=>$request->streeet,
+            'building'=>$request->building,
+            'floor'=>$request->floor,
+            'flat_number'=>$request->flat_number,
+
+
+          
         ]);
 
         $token = auth()->login($user);
@@ -40,8 +50,58 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
+
+
+
+     
+public function editProfile(Request $request){
+        $user =auth()->user();
+        $user->update([
+        'f_name' => $request->f_name,
+        'l_name' => $request->l_name,
+        'mobile_number'=>$request->mobile_number,
+    ]);
+    return response()->json(['message' => 'Successfully edit your profile']);
+        }
+
+
+
+
+        public function editAddress(Request $request){
+            $user =auth()->user();
+            $user->update([
+            'governerate' => $request->governerate,
+            'area' => $request->area,
+            'street' => $request->street,
+            'building' => $request->building,
+            'floor' => $request->floor,
+            'flat_number' => $request->flat_number,
+        ]);
+        return response()->json(['message' => 'Successfully edit your profile']);
+            }
+
+
+
+            public function changePassword(Request $request){
+                $user =auth()->user();
+                $old_password=bcrypt(auth()->user()->password);
+                if($old_password = bcrypt($request->old_password)) {
+                               
+                $user->update([
+             
+                'password' => bcrypt($request->password),
+              
+               
+            ]);
+      
+            return response()->json(['message' => 'Successfully edit your profile']);
+        }
+        return response()->json(['message' => 'your password is wrong']);
+    } 
+
     public function login()
     {
+        
         $credentials = request(['email', 'password']);
 
         if (! $token =\JWTAuth::attempt($credentials)) {
@@ -61,6 +121,7 @@ class AuthController extends Controller
      */
     public function me()
     {
+        
             return response()->json(auth()->user()) ;
     }
 
