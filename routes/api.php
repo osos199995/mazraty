@@ -16,3 +16,5 @@ Route::resource('categories','ApiCategoriesController');
 Route::resource('subcategories','ApiSubcategoriesController');
 Route::resource('ourproducts','ApiProductController');
 Route::resource('offers','ApiOfferController');
+Route::post('cart','ApiCartController@addCart');
+Route::patch('updatecart','ApiCartController@updateCart');
