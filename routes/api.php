@@ -13,8 +13,8 @@ Route::group(['prefix' => 'auth'], function () {
 
 });
 Route::resource('categories','ApiCategoriesController');
-Route::resource('subcategories','ApiSubcategoriesController');
-Route::resource('ourproducts','ApiProductController');
+Route::resource('subcategories/{categories}/categories','ApiSubcategoriesController');
+Route::resource('subcategories/{products}/ourproducts','ApiProductController');
 Route::resource('offers','ApiOfferController');
 Route::post('cart','ApiCartController@addCart');
 Route::patch('updatecart','ApiCartController@updateCart');

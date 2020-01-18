@@ -10,9 +10,9 @@ use App\Http\Controllers\Controller;
 class ApiSubcategoriesController extends Controller
 {
     use ApiResponceTrait;
-    public function index()
+    public function index($id)
     {
-        $posts=SubcategoriesResource::collection(Subcategories::paginate($this->paginateNumber));
+        $posts=SubcategoriesResource::collection(Subcategories::where('category_id',$id)->paginate($this->paginateNumber));
 
         return $this->ApiResponce($posts) ;
     }

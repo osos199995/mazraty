@@ -10,9 +10,9 @@ use App\Http\Controllers\Controller;
 class ApiProductController extends Controller
 {
     use ApiResponceTrait;
-    public function index()
+    public function index($id)
     {
-        $posts=ProductsResource::collection(Products::paginate($this->paginateNumber));
+        $posts=ProductsResource::collection(Products::where('product_subcategories_id',$id)->paginate($this->paginateNumber));
 
         return $this->ApiResponce($posts) ;
     }
