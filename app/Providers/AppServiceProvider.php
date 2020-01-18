@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Categories;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Route::bind('category', function ($value) {
+            return Categories::where('id', $value)->first() ?? abort(404);
+        });
     }
 
     /**

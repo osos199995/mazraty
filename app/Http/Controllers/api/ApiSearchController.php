@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Http\Requests\SearchRequestForm;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Products;
@@ -9,10 +10,10 @@ use App\Products;
 class ApiSearchController extends Controller
 {
     use ApiResponceTrait;
-    public function Search(Request $request , $product_name)
+    public function Search(SearchRequestForm $request)
     {
         
-       $search=Products::where('title','like','%' . $product_name . '%')->orwhere('title_ar','like','%' . $product_name . '%')->orderBy('title', 'asc')->get();
+       $search=Products::where('title','like','%' . $request->keyword . '%')->orwhere('title_ar','like','%' . $request->keyword . '%')->orderBy('title', 'asc')->get();
 
        return $this->ApiResponce($search);
 

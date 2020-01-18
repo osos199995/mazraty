@@ -12,11 +12,14 @@ class ApiCartController extends Controller
     use ApiResponceTrait;
 
     public function addCart(Request $request){
+$user =auth()->user();
 
-    $random_key=rand();
+
     Cart::create([
-        'cart_content'=>json_encode($request->cart_content),
-        'random_key'=>$random_key,
+'product_id'=>'',
+'qty'=>'',
+
+
     ]);
     return response()->json(['message' => 'your item is added to cart',$random_key]);
 }

@@ -20,7 +20,6 @@ class SubcategoriesResource extends JsonResource
             'name_ar'=>$this->name_ar,
             'description'=>$this->description,
             'description_ar'=>$this->description_ar,
-            'category name'=>$this->Subcategories->name,
             'image'=>asset('subcategories/'.$this->image),
         ];
     }

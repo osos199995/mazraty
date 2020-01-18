@@ -11,4 +11,10 @@ class Categories extends Model
       'name_ar',
       'image',
     ];
+
+    public function subCategories(){
+        return $this->hasMany(Subcategories::class,'category_id');
+    }
+
+
 }

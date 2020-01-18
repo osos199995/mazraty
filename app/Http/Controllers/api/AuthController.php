@@ -29,10 +29,10 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'mobile_number'=>$request->mobile_number,
-            'gender_id'=>$request->gender_id,
+            'telephone'=>$request->telephone,
             'governerate'=>$request->governerate,
             'area'=>$request->area,
-            'streeet'=>$request->streeet,
+            'streeet'=>$request->street,
             'building'=>$request->building,
             'floor'=>$request->floor,
             'flat_number'=>$request->flat_number,
@@ -102,7 +102,7 @@ public function editProfile(Request $request){
     public function login()
     {
         
-        $credentials = request(['email', 'password']);
+        $credentials = request(['mobile_number', 'password']);
 
         if (! $token =\JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);

@@ -3,16 +3,18 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\JsonResponse;
 
-class RegisterFormRequest extends APIRequest
+class SearchRequestForm extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-
+    public function authorize()
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,8 +24,7 @@ class RegisterFormRequest extends APIRequest
     public function rules()
     {
         return [
-            'email'=>'email|unique:users|max:50',
-//            'password'=>'min:6|confirmed'
+            "keyword"=>'required',
         ];
     }
 }

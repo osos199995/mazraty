@@ -4,6 +4,10 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Mockery\Exception\BadMethodCallException;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 
 class Handler extends ExceptionHandler
 {
@@ -48,6 +52,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+//        return parent::render($request, $exception);
+////        return json_encode(array("message" => $exception->getMessage())); // or you can
+        if ($exception instanceof NotFoundHttpException) {
+            return response()
+                ->json([
+                    'message' => 'Could\'t find sch a record'
+                ],404);
+        }
+
         return parent::render($request, $exception);
+
     }
+
 }
