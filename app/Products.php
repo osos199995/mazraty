@@ -34,4 +34,7 @@ class Products extends Model
         return $this->belongsTo('App\Subcategories','product_subcategories_id');
     }
 
+    public  function Cart(){
+        return $this->belongsTo('App\Cart','product_id');
+    }
 }

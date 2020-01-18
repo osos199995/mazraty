@@ -17,14 +17,14 @@ class CartResource extends JsonResource
        return [
         'cart id'=>$this->id,
         'cart qty'=>$this->qty,   
-        'title'=>$this->cart->title,
-        'title_ar'=>$this->cart->title_ar,
-        'description'=>$this->cart->description,
-        'description_ar'=>$this->cart->description_ar,
-        'price'=>$this->cart->price,
-        'minimum_qty'=>$this->cart->minimum_qty,
-        'number_of_container'=>$this->cart->number_of_container,
-        'container'=>$this->cart->container,
+        'title'=>$this->Cart->title,
+        'title_ar'=>$this->Cart->title_ar,
+        'description'=>$this->Cart->description,
+        'description_ar'=>$this->Cart->description_ar,
+        'price'=>$this->Cart->price,
+        'minimum_qty'=>$this->Cart->minimum_qty,
+        'number_of_container'=>$this->Cart->number_of_container,
+        'container'=>$this->Cart->container,
     
         ];
     }

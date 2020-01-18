@@ -19,6 +19,10 @@ Route::resource('offers','ApiOfferController');
 Route::get('search','ApiSearchController@Search');
 
 
+Route::group(['middleware' => 'auth'], function () {
 
-Route::post('cart','ApiCartController@addCart');
-Route::patch('updatecart','ApiCartController@updateCart');
+    Route::post('cart','ApiCartController@addCart');
+    Route::patch('updatecart/{cartUpdate}','ApiCartController@updateCart');
+    Route::get('getcart/{user_id}','ApiCartController@getCart');
+    Route::delete('deletecart/{cart_id}','ApiCartController@deleteCart');
+});
