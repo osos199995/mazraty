@@ -12,6 +12,8 @@ Route::group(['prefix' => 'auth'], function () {
     Route::patch('changepassword','AuthController@changePassword');
 
 });
+
+
 Route::resource('categories','ApiCategoriesController');
 Route::get('subcategories/{category}/categories','ApiSubcategoriesController@index');
 Route::resource('subcategories/{products}/ourproducts','ApiProductController');
@@ -20,9 +22,8 @@ Route::get('search','ApiSearchController@Search');
 
 
 Route::group(['middleware' => 'auth'], function () {
-
-    Route::post('cart','ApiCartController@addCart');
-    Route::patch('updatecart/{cartUpdate}','ApiCartController@updateCart');
-    Route::get('getcart/{user_id}','ApiCartController@getCart');
-    Route::delete('deletecart/{cart_id}','ApiCartController@deleteCart');
+Route::post('cart','ApiCartController@addCart');
+Route::patch('updatecart/{cartUpdate}','ApiCartController@updateCart');
+Route::get('getcart/{user_id}','ApiCartController@getCart');
+Route::delete('deletecart/{cart_id}','ApiCartController@deleteCart');
 });

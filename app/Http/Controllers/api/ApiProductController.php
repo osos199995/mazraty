@@ -12,8 +12,9 @@ class ApiProductController extends Controller
     use ApiResponceTrait;
     public function index($id)
     {
-        $posts=ProductsResource::collection(Products::where('product_subcategories_id',$id)->paginate($this->paginateNumber));
 
-        return $this->ApiResponce($posts) ;
+        $products=ProductsResource::collection(Products::where('product_subcategories_id',$id->id)->paginate($this->paginateNumber));
+
+        return response()->json(['data'=>$products]);
     }
 }

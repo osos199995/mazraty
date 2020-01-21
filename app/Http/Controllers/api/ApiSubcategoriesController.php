@@ -15,7 +15,6 @@ class ApiSubcategoriesController extends Controller
     {
 
         $subCategories=SubcategoriesResource::collection(Subcategories::where('category_id',$category->id)->paginate(2));
-
-        return response()->json(['data'=>$subCategories]);
+         return response()->json(['data'=>$subCategories]);
     }
 }
