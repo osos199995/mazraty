@@ -11,7 +11,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::patch('editaddress','AuthController@editAddress')->middleware('auth');
     Route::patch('changepassword','AuthController@changePassword')->middleware('auth');
     Route::Patch('varify/{user_id}','AuthController@verify')->middleware('auth');
-    Route::get('forgOt', 'AuthController@forgot');
+    Route::post('forgot', 'AuthController@forgot');
 });
 
 

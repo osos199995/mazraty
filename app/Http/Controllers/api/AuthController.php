@@ -17,8 +17,8 @@ use Tymon\JWTAuth\Claims\JwtId;
 
 class AuthController extends Controller
 {
-use SendsPasswordResetEmails;
-use ResetsPasswords;
+//use SendsPasswordResetEmails;
+//use ResetsPasswords;
     public function __construct()
     {
         $this->middleware('api');
@@ -27,7 +27,7 @@ use ResetsPasswords;
 
     public function Register(RegisterFormRequest $request)
     {
-        
+        $random=rand(4000,4999);
         $user = User::create([
             'f_name' => $request->f_name,
             'l_name' => $request->l_name,
@@ -41,11 +41,22 @@ use ResetsPasswords;
             'building'=>$request->building,
             'floor'=>$request->floor,
             'flat_number'=>$request->flat_number,
-            'verify'=>rand(4000,4999),
+            'verify'=>$random,
 
           
         ]);
 
+//        $basic  = new \Nexmo\Client\Credentials\Basic('d518f7a5', 'v6nrDgRGricSXeCa');
+////        $client = new \Nexmo\Client($basic);
+////        $message = $client->message()->send([
+////            'to' => $request->mobile_number,
+////            'from' => 'mazraty',
+////            'text' => 'Hello from mazraty your verification code' . $random,
+////        ]);
+///
+///
+///
+///
 //        $token = auth()->login($user);
 //        return $this->respondWithToken($token);
         return response()->json(['message'=>'your registered successfully',200]);
@@ -155,9 +166,23 @@ public function editProfile(Request $request){
      *
      *
      */
-    public function forgot(Request $request):Response{
+    public function forgot(Request $request){
 
-        return $this->sendResetLinkEmail($request);
+
+        $user=User::where('mobile_number',$request->mobile_number)->first();
+        $randompassword=rand(800000,899999);
+        $user->update([
+            'password'=>bcrypt($randompassword),
+        ]);
+//        $basic  = new \Nexmo\Client\Credentials\Basic('d518f7a5', 'v6nrDgRGricSXeCa');
+//        $client = new \Nexmo\Client($basic);
+//         $message = $client->message()->send([
+//            'to' => $request->mobile_number,
+//            'from' => 'mazraty',
+//            'text' => 'Hello from mazraty your new password' . $randompassword,
+//        ]);
+
+        return response()->json(['message' => 'Successfully password send and changed']);
     }
 
     /**
