@@ -5,15 +5,20 @@ namespace App\Http\Controllers\api;
 use App\Http\Requests\RegisterFormRequest;
 use App\Http\Resources\UsersResource;
 use App\User;
+use http\Env\Response;
+use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Claims\JwtId;
 
 class AuthController extends Controller
 {
-
+use SendsPasswordResetEmails;
+use ResetsPasswords;
     public function __construct()
     {
         $this->middleware('api');
@@ -36,14 +41,14 @@ class AuthController extends Controller
             'building'=>$request->building,
             'floor'=>$request->floor,
             'flat_number'=>$request->flat_number,
-
+            'verify'=>rand(4000,4999),
 
           
         ]);
 
-        $token = auth()->login($user);
-
-        return $this->respondWithToken($token);
+//        $token = auth()->login($user);
+//        return $this->respondWithToken($token);
+        return response()->json(['message'=>'your registered successfully',200]);
     }
     /**
      * Get a JWT via given credentials.
@@ -51,15 +56,25 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-
+public function verify(Request $request ,$id){
+    $user =User::where('id',$id)->first();
+    if($user->is_verified == 0){
+        $user->update([
+            'is_verified'=>1,
+        ]);
+        return response()->json(['message'=>'you verified successfully',200]);
+    }
+    return response()->json(['message'=>'you already verified',200]);
+}
 
      
 public function editProfile(Request $request){
-        $user =auth()->user();
+
+        $user =User::where('id',auth()->user()->id)->first();
         $user->update([
         'f_name' => $request->f_name,
         'l_name' => $request->l_name,
-        'mobile_number'=>$request->mobile_number,
+//        'mobile_number'=>$request->mobile_number,
     ]);
     return response()->json(['message' => 'Successfully edit your profile']);
         }
@@ -68,7 +83,7 @@ public function editProfile(Request $request){
 
 
         public function editAddress(Request $request){
-            $user =auth()->user();
+            $user =User::where('id',auth()->user()->id)->first();
             $user->update([
             'governerate' => $request->governerate,
             'area' => $request->area,
@@ -77,25 +92,23 @@ public function editProfile(Request $request){
             'floor' => $request->floor,
             'flat_number' => $request->flat_number,
         ]);
-        return response()->json(['message' => 'Successfully edit your profile']);
+            return response()->json(['message' => 'Successfully edit your address']);
             }
 
+            public function changePassword(Request $request)
+            {
+                $currentuserpassword = User::where('id', auth()->user()->id)->first();
 
+                if (Hash::check($request['old_password'],Auth::user()->password)  ){
 
-            public function changePassword(Request $request){
-                $user =auth()->user();
-                $old_password=bcrypt(auth()->user()->password);
-                if($old_password = bcrypt($request->old_password)) {
-                               
+                    $user = User::where('id', auth()->user()->id)->first();
                 $user->update([
-             
-                'password' => bcrypt($request->password),
-              
-               
-            ]);
-      
-            return response()->json(['message' => 'Successfully edit your profile']);
-        }
+                    'password' => bcrypt($request->password),
+
+
+                ]);
+                return response()->json(['message' => 'Successfully your password changed']);
+            }
         return response()->json(['message' => 'your password is wrong']);
     } 
 
@@ -135,6 +148,16 @@ public function editProfile(Request $request){
         auth()->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    /**forget password
+     *
+     *
+     *
+     */
+    public function forgot(Request $request):Response{
+
+        return $this->sendResetLinkEmail($request);
     }
 
     /**

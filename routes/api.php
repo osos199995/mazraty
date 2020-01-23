@@ -7,10 +7,11 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('refresh', 'AuthController@refresh')->middleware('auth');
     Route::post('me', 'AuthController@me')->middleware('auth');
     Route::post('register', 'AuthController@Register')->name('usersRegister');
-    Route::patch('editprofile','AuthController@editProfile');
-    Route::patch('editaddress','AuthController@editAddress');
-    Route::patch('changepassword','AuthController@changePassword');
-
+    Route::patch('editprofile','AuthController@editProfile')->middleware('auth');
+    Route::patch('editaddress','AuthController@editAddress')->middleware('auth');
+    Route::patch('changepassword','AuthController@changePassword')->middleware('auth');
+    Route::Patch('varify/{user_id}','AuthController@verify')->middleware('auth');
+    Route::get('forgOt', 'AuthController@forgot');
 });
 
 
@@ -26,4 +27,5 @@ Route::post('cart','ApiCartController@addCart');
 Route::patch('updatecart/{cartUpdate}','ApiCartController@updateCart');
 Route::get('getcart/{user_id}','ApiCartController@getCart');
 Route::delete('deletecart/{cart_id}','ApiCartController@deleteCart');
+
 });

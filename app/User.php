@@ -28,7 +28,9 @@ class User extends Authenticatable implements  JWTSubject
         'street',
         'building',
         'floor',
-        'flat_number'
+        'flat_number',
+        'verify',
+        'is_verified'
         
         
         
